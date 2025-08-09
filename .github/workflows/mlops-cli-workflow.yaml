@@ -1,4 +1,4 @@
-name: MLOps kind: ConfigMap
+name: MLOps
 
 on:
   push:
