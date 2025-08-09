@@ -93,7 +93,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: kcheid@fastapi:v1
+          tags: docker.io/io/${{ vars.DOCKERHUB_USERNAME }}/fastapi:latest
           context: .
           file: Dockerfile
 
