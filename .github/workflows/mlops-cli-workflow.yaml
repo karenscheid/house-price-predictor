@@ -44,16 +44,26 @@ jobs:
           --output data/processed/featured_house_data.csv   \
           --preprocessor models/trained/preprocessor.pkl
 
-      - name: Set up MLflow
+      - name: Pull MLflow image
+        run: docker pull ghcr.io/mlflow/mlflow:latest
+
+      - name: Start MLflow server
         run: |
-          docker pull ghcr.io/mlflow/mlflow:latest \
-          docker run -d -p 5555:5000 --name mlflow-server ghcr.io/mlflow/ \
-          mlflow:latest mlflow server --host 0.0.0.0 --backend-store-uri sqlite:/// \
-          mlflow.db \
-          - name: Wait for MLflow to start \
-          run: | \
-          for i in {1..10}; do \
-          curl -f http://localhost:5000/health || sleep 5; \
+          docker run -d \
+            -p 5555:5000 \
+            --name mlflow-server \
+            ghcr.io/mlflow/mlflow:latest \
+            mlflow server --host 0.0.0.0 --backend-store-uri sqlite:///mlflow.db
+
+      - name: Wait for MLflow to start
+        run: |
+          for i in {1..10}; do
+            if curl -f http://localhost:5555/health; then
+              echo "MLflow is up!"
+              break
+            fi
+            echo "Waiting for MLflow to start..."
+            sleep 5
           done
 
       - name: Train model
