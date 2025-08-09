@@ -84,3 +84,24 @@ jobs:
         run: |
            docker stop mlflow-server || true
            docker rm mlflow-server || true
+
+
+build-and-publish:
+  needs: model-training
+  runs-on: ubuntu-latest
+
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Download trained model
+      uses: actions/download-artifact@v4
+      with:
+        name: trained-model
+        path: models/
+
+    - name: Download preprocessor
+      uses: actions/download-artifact@v4
+      with:
+        name: preprocessor
+        path: models/trained/
