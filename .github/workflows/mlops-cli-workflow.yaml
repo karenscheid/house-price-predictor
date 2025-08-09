@@ -31,7 +31,7 @@ jobs:
           --input data/raw/house_data.csv \
           --output data/processed/cleaned_house_data.csv
 
-      - name: Engineer features
+      - name: Setup Engineer features
         run: |
           python src/features/engineer.py   --input data/processed/cleaned_house_data.csv  \
           --output data/processed/featured_house_data.csv   \
