@@ -1,6 +1,6 @@
 services:
   fastapi:
-    image: kcheid/fastapi:v1
+    image: kcheid/house-price--model:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,5 +14,5 @@ services:
     ports:
       - 8501:8501
     environment:
-      API_URL: http://fastapi:8000
+      API_URL: http://model:8000
 
