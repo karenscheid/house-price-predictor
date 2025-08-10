@@ -24,11 +24,10 @@ on:
     types: [created]
     branches: [ main ]
     tags: [ v*.*.* ]
-  # push:
-  #   branches: [ main ]
-  #   tags: [ 'v*.*.*' ]
-  # pull_request:
-  #   branches: [ main ]
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
     
 jobs:
   data-processing:
