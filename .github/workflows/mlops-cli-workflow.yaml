@@ -1,4 +1,4 @@
-name: MLOps
+name: MLOps CLI End to End
 
 on:
   workflow_dispatch:
